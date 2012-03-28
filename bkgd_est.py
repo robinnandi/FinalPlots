@@ -3,7 +3,7 @@ print "And we're off ..."
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-from config import MC_Bkgd_Est_2 as config
+from config import MC_Bkgd_Est_3 as config
 print "Imported files."
 
 # Create the figure
@@ -75,16 +75,12 @@ print "Done legend."
 
 # Ratio plot
 plt.subplot(212)
-#diff = [ 100*(yvalues[1][i] - yvalues[0][i])/yvalues[0][i] for i in range(nbins) ]
 diff = np.zeros(nbins)
 err = np.zeros(nbins)
 for i in range(nbins):
     if yvalues[0][i] > 0:
         diff[i] = 100*(yvalues[1][i] - yvalues[0][i])/yvalues[0][i] 
-        err[i] = 100*math.sqrt(yerrors[0][i]**2+yvalues[0][i])/yvalues[0][i]
-        #err[i] = 100*math.sqrt(yerrors[0][i]**2 + yerrors[1][i]**2)/yvalues[0][i]
-#ratio = [ yvalues[1][i]/yvalues[0][i] for i in range(nbins) ]
-#err = [ 100*math.sqrt(yerrors[0][i]**2+yvalues[0][i])/yvalues[0][i] for i in range(nbins) ]
+        err[i] = 100*math.sqrt(yerrors[0][i]**2+yerrors[1][i]**2+yvalues[0][i])/yvalues[0][i]
 sum = 0
 chi2 = 0
 n = 0
