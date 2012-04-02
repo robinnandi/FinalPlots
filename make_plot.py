@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker
-from config import nVertices_MC as config
+from config import Jet_Pt_Resolution as config
 
 # Create the figure
 fig = plt.figure()
@@ -32,6 +32,13 @@ binwidth = round(xvalues[1] - xvalues[0], 5)
 xmin = round(xvalues[0]-binwidth/2, 5)
 xmax = round(xmin + binwidth*nbins, 5)
 bins = np.arange(xmin, xmax+binwidth, binwidth)
+
+try:
+    if config.adjustmargins == True:
+        axes = plt.Axes(fig, [.1,.15,.8,.75])
+        fig.add_axes(axes)
+except:
+    print "Default margins used."
 
 # Plot the graphs
 for i in range(config.ngraphs):
@@ -69,6 +76,14 @@ try:
     plt.plot([config.cutvalue, config.cutvalue], [ymin, ymax], "k-", label="cut value")
 except:
     print "Cut value not specified."
+
+# Fill error band
+try:
+    if config.fill == True:
+        ax.fill_between(xvalues, yvalues[0], yvalues[2], facecolor="y")
+        plt.errorbar([config.point[0]], [config.point[1]], xerr=[config.err], color="k", marker="o")
+except:
+    print "Not filled."
 
 # Put in xlabel and ylabel
 plt.xlabel(config.xlabel)

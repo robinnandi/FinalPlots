@@ -93,7 +93,7 @@ mean = sum/n
 chi2ndof = chi2/nbins
 error = 1/math.sqrt(n)
 chi2 = 1.79
-plt.errorbar(xvalues, diff, yerr=err, color="k", marker=".", linestyle="")
+plt.errorbar(xvalues, diff, yerr=err, color="k", marker="o", linestyle="")
 plt.plot([xmin, xmax], [mean, mean], color="k")
 text = "\\begin{eqnarray}&&a = %.1f\pm%.1f\%s\\\\&&\chi^{2}/ndof = %.1f\\end{eqnarray}" % (mean, error, "%", chi2ndof)
 print text
