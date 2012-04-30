@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker
-from config import Jet_Pt_Resolution as config
+from config import nVertices as config
 
 # Create the figure
 fig = plt.figure()
@@ -43,7 +43,7 @@ except:
 # Plot the graphs
 for i in range(config.ngraphs):
     if config.types[i] == "hist":
-        plt.hist(xvalues, bins=bins, range=None, normed=False, weights=yvalues[i], histtype=config.histtypes[i], color=config.colors[i], label=config.labels[i])
+        plt.hist(xvalues, bins=bins, range=None, normed=False, weights=yvalues[i], histtype=config.histtypes[i], color=config.colors[i], label=config.labels[i], hatch = config.hatch[i])
         plt.errorbar(xvalues, yvalues[i], yerr=yerrors[i], color=config.colors[i], marker=config.markers[i], linestyle="", label="")
     elif config.types[i] == "plot":
         #plt.plot(xvalues, yvalues[i], color=config.colors[i], marker=config.markers[i], linestyle=config.linestyles[i], label=config.labels[i])
@@ -61,6 +61,7 @@ except:
     print "Default x-axis range used."
 ymin = ax.get_ylim()[0]
 ymax = ax.get_ylim()[1]
+ymax = 0.2
 try:
     if config.xlog == True:
         ax.set_xscale("log")
